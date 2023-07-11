@@ -7,28 +7,40 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
+import com.logger.databinding.ActivityMainBinding
 import com.logs.BuildConfigConstant
 import com.logs.fileprinter.file.FilePrinter
 import com.logs.fileprinter.file.naming.DateFileNameGenerator
 import com.logs.fileprinter.file.path.FileDirectory
 import com.logs.fileprinter.file.writer.SimpleWriter
 import com.logs.permission.LogWritePermission
+import com.logs.sharefile.ShareViaEmail
 import com.logs.storage.StorageCheck
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
+    lateinit var viewBinding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
       //  permission()
         //initLog()
 
         StorageCheck().getInternalMemoryInfo()
         LogWritePermission().checkPermission(this)
         initLog()
+
+
+        viewBinding.sendEmailButton.setOnClickListener {
+            ShareViaEmail().sendEmail(this,"com.logger.provider")
+        }
+
+
     }
 
 
@@ -70,9 +82,9 @@ class MainActivity : AppCompatActivity() {
             })
             .build()
 
-        for (i in 0..1000){
+        for (i in 0..10){
             Log.d("checkLoop", i.toString())
-            filePrinter.println(i,"LOG","This is meesage", "MainAct.")
+            filePrinter.println(i,"LOG","This is message", "MainAct.")
         }
 
     }
