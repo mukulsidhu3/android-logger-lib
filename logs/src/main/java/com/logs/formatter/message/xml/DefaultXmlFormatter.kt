@@ -5,7 +5,6 @@ import java.io.StringReader
 import java.io.StringWriter
 import java.lang.Exception
 import javax.xml.transform.OutputKeys
-import javax.xml.transform.Transformer
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource

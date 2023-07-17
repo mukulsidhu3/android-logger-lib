@@ -4,7 +4,7 @@ import com.logs.Constants
 
 class DefaultStackTraceFormatter: StackTraceFormatter {
 
-    override fun format(data: Array<StackTraceElement>): String {
+    override fun format(data: Array<StackTraceElement?>): String {
         val sb = StringBuilder(256)
         return if (data.isEmpty()) {
            return Constants.EMPTY_STRING

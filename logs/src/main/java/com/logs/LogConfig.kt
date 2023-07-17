@@ -2,6 +2,7 @@ package com.logs
 
 import com.logs.formatter.message.json.JsonFormatter
 import com.logs.formatter.message.xml.XmlFormatter
+import kotlin.math.log
 
 class LogConfig internal constructor(val builder: Builder) {
 
@@ -13,11 +14,21 @@ class LogConfig internal constructor(val builder: Builder) {
 
     val xmlFormatter: XmlFormatter
 
+    val withStackTrace: Boolean
+
+  //  val stackTraceOrigin: String
+
+    val stackTraceDepth: Int
+
     init {
         logLevel = builder.logLevel
         tag = builder.tag
         jsonFormatter = builder.jsonFormatter
         xmlFormatter = builder.xmlFormatter
+        withStackTrace = builder.withStackTrace
+      //  stackTraceOrigin = builder.stackTraceOrigin
+        stackTraceDepth = builder.stackTraceDepth
+
     }
 
 
@@ -34,11 +45,20 @@ class LogConfig internal constructor(val builder: Builder) {
 
         var xmlFormatter: XmlFormatter
 
+        var withStackTrace: Boolean
+
+      //  var stackTraceOrigin: String
+
+        var stackTraceDepth: Int
+
         init {
             logLevel = logConfig.logLevel
             tag = logConfig.tag
             jsonFormatter = logConfig.jsonFormatter
             xmlFormatter = logConfig.xmlFormatter
+            withStackTrace = logConfig.withStackTrace
+          //  stackTraceOrigin = logConfig.stackTraceOrigin
+            stackTraceDepth = logConfig.stackTraceDepth
 
         }
 
@@ -59,6 +79,12 @@ class LogConfig internal constructor(val builder: Builder) {
 
         fun xmlFormatter(xmlFormatter: XmlFormatter): Builder {
             this.xmlFormatter = xmlFormatter
+            return this
+        }
+
+        fun enableStackTrace(depth: Int): Builder{
+            this.withStackTrace = true
+            this.stackTraceDepth = depth
             return this
         }
 

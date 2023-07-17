@@ -22,7 +22,7 @@ class StackTraceUtil {
         var ignoreDepth = 0
         val allDepth = stackTrace.size
         var className: String
-        for (i in allDepth - 1 downTo 0) {
+       /* for (i in allDepth - 1 downTo 0) {
             className = stackTrace[i].className
             if (className.startsWith("") || stackTraceOrigin != null && className.startsWith(
                     stackTraceOrigin
@@ -31,7 +31,7 @@ class StackTraceUtil {
                 ignoreDepth = i + 1
                 break
             }
-        }
+        } */
         val realDepth = allDepth - ignoreDepth
         val realStack = arrayOfNulls<StackTraceElement>(realDepth)
         System.arraycopy(stackTrace, ignoreDepth, realStack, 0, realDepth)
