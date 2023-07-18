@@ -6,5 +6,6 @@ class Constants {
         const val EMPTY_STRING = ""
         const val folderName = "LOG"
         const val fileName = "LogFile"
+        var FILE_PATH = ""
     }
 }

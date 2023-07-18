@@ -1,5 +1,6 @@
 package com.logger
 
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import com.logger.Tracer.Companion.stackTraceFormat
 import com.logger.databinding.ActivityMainBinding
 import com.logs.BuildConfigConstant
+import com.logs.Logger
 import com.logs.fileprinter.file.FilePrinter
 import com.logs.fileprinter.file.naming.DateFileNameGenerator
 import com.logs.fileprinter.file.path.FileDirectory
@@ -20,10 +22,20 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewBinding: ActivityMainBinding
+
+
+  //
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+        com.logs.Log.Companion.createFilePrinter(BuildConfig.VERSION_NAME,BuildConfig.VERSION_CODE,
+           this
+        )
+
+        val logger = com.logs.Log()
       //  permission()
         //initLog()
 
@@ -32,12 +44,20 @@ class MainActivity : AppCompatActivity() {
         initLog()
 
 
+
         viewBinding.sendEmailButton.setOnClickListener {
           //  ShareViaEmail().sendEmail(this,"com.logger.provider")
-            stackTraceFormat()
+           // stackTraceFormat()
+            checkLogClass(logger)
         }
 
 
+    }
+
+
+    fun checkLogClass(logger: com.logs.Log){
+
+       logger.logger!!.println(1,"HEY")
     }
 
 
@@ -80,6 +100,8 @@ class MainActivity : AppCompatActivity() {
                 }
             })
             .build()
+
+
 
         for (i in 0..10){
             Log.d("checkLoop", i.toString())

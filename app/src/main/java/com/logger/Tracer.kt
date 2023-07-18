@@ -9,7 +9,7 @@ class Tracer {
     companion object{
         fun stackTraceFormat(){
 
-            val stackTrace = StackTraceUtil().getCroppedRealStackTrack(Throwable().stackTrace,"kk",5)
+            val stackTrace = StackTraceUtil().getCroppedRealStackTrace(Throwable().stackTrace,"kk",5)
             val string = DefaultStackTraceFormatter().format(stackTrace)
 
             Log.d("StackTraceLog", string)

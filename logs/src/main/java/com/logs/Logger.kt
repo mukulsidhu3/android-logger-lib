@@ -1,8 +1,11 @@
 package com.logs
 
+import android.util.Log
 import com.logs.fileprinter.Printer
 import com.logs.formatter.message.json.JsonFormatter
 import com.logs.formatter.message.xml.XmlFormatter
+import com.logs.formatter.stacktrace.DefaultStackTraceFormatter
+import com.logs.utils.StackTraceUtil
 
 class Logger {
 
@@ -90,6 +93,25 @@ class Logger {
         }
 
 
+    }
+
+    /*package*/
+    fun println(logLevel: Int, msg: String?) {
+     /*   if (logLevel < logConfig!!.logLevel) {
+            return
+        }  */
+        printInternal(logLevel, msg ?: "")
+    }
+
+    private fun printInternal(logLevel: Int, msg: String) {
+
+        val stackTrace = StackTraceUtil().getCroppedRealStackTrace(Throwable().stackTrace,"kk",5)
+        val stackTraceString = DefaultStackTraceFormatter().format(stackTrace)
+
+        val string = msg + stackTraceString
+       printer!!.println(logLevel,"TAG",string, "MAin")
+
+        Log.d("CheckLogger", string)
     }
 
 
