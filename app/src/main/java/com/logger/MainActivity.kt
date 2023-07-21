@@ -14,6 +14,7 @@ import com.logs.fileprinter.file.FilePrinter
 import com.logs.fileprinter.file.naming.DateFileNameGenerator
 import com.logs.fileprinter.file.path.FileDirectory
 import com.logs.fileprinter.file.writer.SimpleWriter
+import com.logs.formatter.message.xml.DefaultXmlFormatter
 import com.logs.formatter.stacktrace.DefaultStackTraceFormatter
 import com.logs.permission.LogWritePermission
 import com.logs.storage.StorageCheck
@@ -48,7 +49,8 @@ class MainActivity : AppCompatActivity() {
         viewBinding.sendEmailButton.setOnClickListener {
           //  ShareViaEmail().sendEmail(this,"com.logger.provider")
            // stackTraceFormat()
-            checkLogClass(logger)
+          //  checkLogClass(logger)
+            xmlFormat("<PrintLetterBarcodeData uid=\"633830176228\" name=\"Mukul Sidhu\" gender=\"M\" yob=\"2000\" co=\"S/O Jashpal Singh\" loc=\"Singhpura\" vtc=\"Singhpura\" po=\"Safidon\" dist=\"Jind\" subdist=\"Safidon\" state=\"Haryana\" pc=\"126112\" dob=\"01/04/2000\"/>")
         }
 
 
@@ -60,6 +62,11 @@ class MainActivity : AppCompatActivity() {
        logger.logger!!.println(1,"HEY")
     }
 
+    fun xmlFormat(string: String){
+       val s = DefaultXmlFormatter().format(string)
+        Log.d("XMLFORMAT", s)
+
+    }
 
 
 
