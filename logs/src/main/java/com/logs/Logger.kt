@@ -19,7 +19,7 @@ class Logger {
         this.printer = printer
     }
 
-    constructor(builder: Logger.Builder){
+    constructor(builder: Logger.Builder) {
         val logConfigBuilder: LogConfig.Builder? = null
 
         if (builder.logLevel != 0) {
@@ -30,11 +30,11 @@ class Logger {
             logConfigBuilder?.tag(builder.tag!!)
         }
 
-        if (builder.jsonFormatter != null){
+        if (builder.jsonFormatter != null) {
             logConfigBuilder?.jsonFormatter(builder.jsonFormatter!!)
         }
 
-        if (builder.xmlFormatter != null){
+        if (builder.xmlFormatter != null) {
             logConfigBuilder?.xmlFormatter(builder.xmlFormatter!!)
         }
 
@@ -52,10 +52,10 @@ class Logger {
         var tag: String? = null
 
         //The JSON formatter when log a JSON string.
-         var jsonFormatter: JsonFormatter? = null
+        var jsonFormatter: JsonFormatter? = null
 
         //The XML formatter when [Logger] log a XML string.
-         var xmlFormatter: XmlFormatter? = null
+        var xmlFormatter: XmlFormatter? = null
 
         //Printer used to print the log
         var printer: Printer? = null
@@ -97,19 +97,40 @@ class Logger {
 
     /*package*/
     fun println(logLevel: Int, msg: String?) {
-     /*   if (logLevel < logConfig!!.logLevel) {
-            return
-        }  */
+        /*   if (logLevel < logConfig!!.logLevel) {
+               return
+           }  */
         printInternal(logLevel, msg ?: "")
+    }
+
+
+    fun v(msg: String) {
+        println(LogLevel.VERBOS, msg)
+    }
+
+    fun d(msg: String) {
+        println(LogLevel.DEBUG, msg)
+    }
+
+    fun i(msg: String) {
+        println(LogLevel.INFO, msg)
+    }
+
+    fun e(msg: String) {
+        println(LogLevel.ERROR, msg)
+    }
+
+    fun w(msg: String) {
+        println(LogLevel.WARN, msg)
     }
 
     private fun printInternal(logLevel: Int, msg: String) {
 
-        val stackTrace = StackTraceUtil().getCroppedRealStackTrace(Throwable().stackTrace,"kk",5)
+        val stackTrace = StackTraceUtil().getCroppedRealStackTrace(Throwable().stackTrace, "kk", 5)
         val stackTraceString = DefaultStackTraceFormatter().format(stackTrace)
 
         val string = msg + stackTraceString
-       printer!!.println(logLevel,"TAG",string, "MAin")
+        printer!!.println(logLevel, "TAG", string, "MAin")
 
         Log.d("CheckLogger", string)
     }

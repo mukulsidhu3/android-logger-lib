@@ -60,6 +60,11 @@ class MainActivity : AppCompatActivity() {
     fun checkLogClass(logger: com.logs.Log){
 
        logger.logger!!.println(1,"HEY")
+        logger.logger!!.v("VERBOS")
+        logger.logger!!.d("DEBUG")
+        logger.logger!!.i("INFO")
+        logger.logger!!.e("ERROR")
+        logger.logger!!.w("WARN")
     }
 
     fun xmlFormat(string: String){
