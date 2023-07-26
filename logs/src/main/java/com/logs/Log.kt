@@ -40,6 +40,7 @@ class Log {
                     }
                 })
                 .build()
+
         }
     }
 
