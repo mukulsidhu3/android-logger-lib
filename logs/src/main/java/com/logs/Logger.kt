@@ -3,6 +3,7 @@ package com.logs
 import android.util.Log
 import com.logs.fileprinter.Printer
 import com.logs.formatter.message.json.JsonFormatter
+import com.logs.formatter.message.`object`.ObjectFormatter
 import com.logs.formatter.message.xml.XmlFormatter
 import com.logs.formatter.stacktrace.DefaultStackTraceFormatter
 import com.logs.utils.StackTraceUtil
@@ -19,7 +20,7 @@ class Logger {
         this.printer = printer
     }
 
-    constructor(builder: Logger.Builder) {
+    constructor(builder: Builder) {
         val logConfigBuilder: LogConfig.Builder? = null
 
         if (builder.logLevel != 0) {
@@ -122,6 +123,41 @@ class Logger {
 
     fun w(msg: String) {
         println(LogLevel.WARN, msg)
+    }
+
+    /**
+     * Log a JSOn string
+     */
+    fun json(json: String?) {
+        if (LogLevel.DEBUG < logConfig!!.logLevel) {
+            return
+        }
+        printInternal(LogLevel.DEBUG, logConfig!!.jsonFormatter.format(json!!))
+    }
+
+    /**
+     * Log a XML string
+     */
+    fun xml(xml: String?) {
+        if (LogLevel.DEBUG < logConfig!!.logLevel) {
+            return
+        }
+        printInternal(LogLevel.DEBUG, logConfig!!.xmlFormatter.format(xml!!))
+    }
+
+
+    private fun <T> println(logLevel: Int, `object`: T?) {
+        if (logLevel < logConfig!!.logLevel) {
+            return
+        }
+        val objectString: String = if (`object` != null) {
+            val objectFormatter: ObjectFormatter<in T> =
+                logConfig!!.getObjectFormatter(`object`) as ObjectFormatter<in T>
+            objectFormatter.format(`object`)
+        } else {
+            "null"
+        }
+        printInternal(logLevel, objectString)
     }
 
     private fun printInternal(logLevel: Int, msg: String) {

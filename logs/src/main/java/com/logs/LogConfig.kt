@@ -1,8 +1,8 @@
 package com.logs
 
 import com.logs.formatter.message.json.JsonFormatter
+import com.logs.formatter.message.`object`.ObjectFormatter
 import com.logs.formatter.message.xml.XmlFormatter
-import kotlin.math.log
 
 class LogConfig internal constructor(val builder: Builder) {
 
@@ -19,6 +19,8 @@ class LogConfig internal constructor(val builder: Builder) {
   //  val stackTraceOrigin: String
 
     val stackTraceDepth: Int
+
+    private val objectFormatters: Map<Class<*>, ObjectFormatter<*>>? = null
 
     init {
         logLevel = builder.logLevel
@@ -51,6 +53,8 @@ class LogConfig internal constructor(val builder: Builder) {
 
         var stackTraceDepth: Int
 
+        private var objectFormatters: Map<Class<*>, ObjectFormatter<*>>? = null
+
         init {
             logLevel = logConfig.logLevel
             tag = logConfig.tag
@@ -59,6 +63,10 @@ class LogConfig internal constructor(val builder: Builder) {
             withStackTrace = logConfig.withStackTrace
           //  stackTraceOrigin = logConfig.stackTraceOrigin
             stackTraceDepth = logConfig.stackTraceDepth
+
+            if (logConfig.objectFormatters != null) {
+                objectFormatters = HashMap(logConfig.objectFormatters)
+            }
 
         }
 
@@ -92,6 +100,28 @@ class LogConfig internal constructor(val builder: Builder) {
             return LogConfig(this)
         }
 
+    }
+
+    inline fun < reified T : Any>T.logTag() = T::class.java.simpleName
+
+    inline fun <reified T> T.className(value: T): Class<T> {
+        return T::class.java
+    }
+    fun <T> getObjectFormatter(objects: T): ObjectFormatter<in T>? {
+        if (objectFormatters == null) {
+            return null
+        }
+
+        var clazz: Class<in T>?
+        var superClazz = className(objects)
+
+        var formatter: ObjectFormatter<in T>
+        do {
+            clazz = superClazz
+            formatter = objectFormatters.get(clazz) as ObjectFormatter<in T>
+            superClazz = clazz.superclass as Class<Any?>
+        } while (formatter == null && superClazz != null)
+        return formatter
     }
 
 
