@@ -25,16 +25,16 @@ class LogConfig internal constructor(val builder: Builder) {
     init {
         logLevel = builder.logLevel
         tag = builder.tag
-        jsonFormatter = builder.jsonFormatter
-        xmlFormatter = builder.xmlFormatter
-        withStackTrace = builder.withStackTrace
+        jsonFormatter = builder.jsonFormatter!!
+        xmlFormatter = builder.xmlFormatter!!
+        withStackTrace = builder.withStackTrace!!
       //  stackTraceOrigin = builder.stackTraceOrigin
-        stackTraceDepth = builder.stackTraceDepth
+        stackTraceDepth = builder.stackTraceDepth!!
 
     }
 
 
-    class Builder internal constructor(private val logConfig: LogConfig) {
+    class Builder {
         private val defaultLogLevel: Int = LogLevel.ALL
 
         private val defaultTag = "LOG"
@@ -43,32 +43,18 @@ class LogConfig internal constructor(val builder: Builder) {
 
         var tag: String = defaultTag
 
-        var jsonFormatter: JsonFormatter
+        var jsonFormatter: JsonFormatter? = null
 
-        var xmlFormatter: XmlFormatter
+        var xmlFormatter: XmlFormatter? = null
 
-        var withStackTrace: Boolean
+        var withStackTrace: Boolean? = null
 
       //  var stackTraceOrigin: String
 
-        var stackTraceDepth: Int
+        var stackTraceDepth: Int? = null
 
         private var objectFormatters: Map<Class<*>, ObjectFormatter<*>>? = null
 
-        init {
-            logLevel = logConfig.logLevel
-            tag = logConfig.tag
-            jsonFormatter = logConfig.jsonFormatter
-            xmlFormatter = logConfig.xmlFormatter
-            withStackTrace = logConfig.withStackTrace
-          //  stackTraceOrigin = logConfig.stackTraceOrigin
-            stackTraceDepth = logConfig.stackTraceDepth
-
-            if (logConfig.objectFormatters != null) {
-                objectFormatters = HashMap(logConfig.objectFormatters)
-            }
-
-        }
 
         fun logLevel(logLevel: Int): Builder {
             this.logLevel = logLevel

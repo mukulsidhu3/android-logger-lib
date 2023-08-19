@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.logger.Tracer.Companion.stackTraceFormat
 import com.logger.databinding.ActivityMainBinding
 import com.logs.BuildConfigConstant
 import com.logs.Logger
@@ -14,8 +13,6 @@ import com.logs.fileprinter.file.FilePrinter
 import com.logs.fileprinter.file.naming.DateFileNameGenerator
 import com.logs.fileprinter.file.path.FileDirectory
 import com.logs.fileprinter.file.writer.SimpleWriter
-import com.logs.formatter.message.xml.DefaultXmlFormatter
-import com.logs.formatter.stacktrace.DefaultStackTraceFormatter
 import com.logs.permission.LogWritePermission
 import com.logs.storage.StorageCheck
 import com.logs.utils.StackTraceUtil
@@ -68,8 +65,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun xmlFormat(string: String){
-       val s = DefaultXmlFormatter().format(string)
-        Log.d("XMLFORMAT", s)
+
 
     }
 

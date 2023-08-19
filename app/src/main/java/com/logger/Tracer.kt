@@ -1,11 +1,10 @@
 package com.logger
 
 import android.util.Log
-import com.logs.formatter.stacktrace.DefaultStackTraceFormatter
 import com.logs.utils.StackTraceUtil
 
 class Tracer {
-
+     /*
     companion object{
         fun stackTraceFormat(){
 
@@ -14,5 +13,5 @@ class Tracer {
 
             Log.d("StackTraceLog", string)
         }
-    }
+    } */
 }

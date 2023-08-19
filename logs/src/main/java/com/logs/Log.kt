@@ -12,12 +12,12 @@ class Log {
     var logger: Logger? = null
 
     init {
-
+        val logConfigBuilder = LogConfig.Builder().logLevel(1).tag("TAG").enableStackTrace(5)
+        val logConfig = LogConfig(logConfigBuilder)
         logger = Logger.Builder().
         printers(getFilePrinter())
-            .logLevel(1)
-            .tag("LOG_LIBRARY").build()
-
+            .logLevel(logConfig.logLevel)
+            .tag(logConfig.tag).build()
 
     }
 
