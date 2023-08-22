@@ -8,8 +8,15 @@ import android.os.Parcelable
 import java.lang.reflect.InvocationTargetException
 import java.util.Arrays
 
+
+/**
+ * Utility for formatting object to string.
+ */
 class ObjectToStringUtil {
 
+    /**
+     * Bundle object to string, the string would be in the format of "Bundle[{...}]".
+     */
     fun bundleToString(bundle: Bundle): String {
         if (bundle == null) {
             return "null"
@@ -64,6 +71,9 @@ class ObjectToStringUtil {
         return
     }
 
+    /**
+     * Intent object to string, the string would be in the format of "Intent { ... }".
+     */
     fun intentToString(intent: Intent): String {
         if (intent == null) {
             return "null"

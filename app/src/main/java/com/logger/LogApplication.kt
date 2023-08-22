@@ -12,7 +12,7 @@ class LogApplication : Application() {
     }
 
     private fun logInit() {
-       val logConfig =  LogConfig.Builder().
+      // val logConfig =  LogConfig.Builder().
     }
 
 }

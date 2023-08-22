@@ -2,6 +2,9 @@ package com.logs
 
 import android.os.Build
 
+/**
+ * This class is used for get device information.
+ */
 class BuildConfigConstant {
     companion object {
         fun getDeviceInformation(versionName: String, versionCode: Int): String {

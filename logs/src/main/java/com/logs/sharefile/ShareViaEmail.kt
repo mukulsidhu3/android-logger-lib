@@ -11,6 +11,9 @@ import com.logs.Constants
 import com.logs.R
 import java.io.File
 
+/**
+ * This class is used to send log file through email.
+ */
 class ShareViaEmail : ShareFile {
 
     override fun sendEmail(

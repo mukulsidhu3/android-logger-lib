@@ -5,8 +5,12 @@ import android.os.StatFs
 import android.util.Log
 import java.io.File
 
+/**
+ * This class used for check available size of internal memory
+ */
 class StorageCheck: Storage {
 
+    //Get available size of internal memory.
     override fun getInternalMemoryInfo(): Long {
         val path: File = Environment.getDataDirectory()
         val stat = StatFs(path.path)
@@ -19,6 +23,7 @@ class StorageCheck: Storage {
         return availableSpace
     }
 
+    //Return format size of memory
     override fun formatSize(size: Long): Long {
         var totalSize = size
 

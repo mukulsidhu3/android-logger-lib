@@ -6,13 +6,19 @@ import com.logs.fileprinter.file.FilePrinter
 import com.logs.fileprinter.file.naming.DateFileNameGenerator
 import com.logs.fileprinter.file.path.FileDirectory
 import com.logs.fileprinter.file.writer.SimpleWriter
+import com.logs.formatter.message.json.DefaultJsonFormatter
+import com.logs.formatter.message.json.JsonFormatter
+import com.logs.formatter.message.xml.DefaultXmlFormatter
 import java.io.File
 
 class Log {
     var logger: Logger? = null
 
     init {
+        val jsonFormatter = DefaultJsonFormatter()
+        val xmlFormatter = DefaultXmlFormatter()
         val logConfigBuilder = LogConfig.Builder().logLevel(1).tag("TAG").enableStackTrace(5)
+            .jsonFormatter(jsonFormatter).xmlFormatter(xmlFormatter)
         val logConfig = LogConfig(logConfigBuilder)
         logger = Logger.Builder().
         printers(getFilePrinter())

@@ -2,8 +2,14 @@ package com.logs.utils
 
 import android.util.Log
 
+/**
+ * Utility related with stack trace.
+ */
 class StackTraceUtil {
 
+    /**
+     * Get the real stack trace and then crop it with a max depth.
+     */
     fun getCroppedRealStackTrace(
         stackTrace: Array<StackTraceElement>,
         stackTraceOrigin: String,
@@ -17,6 +23,10 @@ class StackTraceUtil {
         )
     }
 
+
+    /**
+     * Get the real stack trace, all elements that come from XLog library would be dropped.
+     */
     fun getRealStackTrace(
         stackTrace: Array<StackTraceElement>,
         stackTraceOrigin: String
@@ -41,6 +51,10 @@ class StackTraceUtil {
         return realStack
     }
 
+
+    /**
+     * Crop the stack trace with a max depth.
+     */
     private fun getCropStackTrace(
         callStack: Array<StackTraceElement?>,
         maxDepth: Int

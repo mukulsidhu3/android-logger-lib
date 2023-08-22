@@ -1,5 +1,9 @@
 package com.logs.utils
 
+
+/**
+ * Represent a single log going to be printed.
+ */
 class LogItem {
 
     // Level of the log.

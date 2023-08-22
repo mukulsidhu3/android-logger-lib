@@ -4,22 +4,38 @@ import com.logs.formatter.message.json.JsonFormatter
 import com.logs.formatter.message.`object`.ObjectFormatter
 import com.logs.formatter.message.xml.XmlFormatter
 
+
+/**
+ * The configuration used for logging, always attached to a Logger, will affect all logs
+ */
 class LogConfig internal constructor(val builder: Builder) {
 
+
+    //The log level, the logs below of which would not be printed.
     val logLevel: Int
 
+    // The tag string.
     val tag: String
 
+    // The JSON formatter used to format the JSON string when log a JSON string.
     val jsonFormatter: JsonFormatter
 
+    // The XML formatter used to format the XML string when log a XML string.
     val xmlFormatter: XmlFormatter
 
+
+    // Whether we should log with stack trace.
     val withStackTrace: Boolean
 
-  //  val stackTraceOrigin: String
+    //val stackTraceOrigin: String
 
+
+    // The number of stack trace elements we should log when logging with stack trace,
+    // 0 if no limitation.
     val stackTraceDepth: Int
 
+
+    // The object formatters, used when logging an object.
     private val objectFormatters: Map<Class<*>, ObjectFormatter<*>>? = null
 
     init {
@@ -28,7 +44,7 @@ class LogConfig internal constructor(val builder: Builder) {
         jsonFormatter = builder.jsonFormatter!!
         xmlFormatter = builder.xmlFormatter!!
         withStackTrace = builder.withStackTrace!!
-      //  stackTraceOrigin = builder.stackTraceOrigin
+        //stackTraceOrigin = builder.stackTraceOrigin
         stackTraceDepth = builder.stackTraceDepth!!
 
     }
@@ -49,7 +65,7 @@ class LogConfig internal constructor(val builder: Builder) {
 
         var withStackTrace: Boolean? = null
 
-      //  var stackTraceOrigin: String
+        //  var stackTraceOrigin: String
 
         var stackTraceDepth: Int? = null
 
@@ -76,7 +92,7 @@ class LogConfig internal constructor(val builder: Builder) {
             return this
         }
 
-        fun enableStackTrace(depth: Int): Builder{
+        fun enableStackTrace(depth: Int): Builder {
             this.withStackTrace = true
             this.stackTraceDepth = depth
             return this
@@ -88,11 +104,12 @@ class LogConfig internal constructor(val builder: Builder) {
 
     }
 
-    inline fun < reified T : Any>T.logTag() = T::class.java.simpleName
+    inline fun <reified T : Any> T.logTag() = T::class.java.simpleName
 
     inline fun <reified T> T.className(value: T): Class<T> {
         return T::class.java
     }
+
     fun <T> getObjectFormatter(objects: T): ObjectFormatter<in T>? {
         if (objectFormatters == null) {
             return null

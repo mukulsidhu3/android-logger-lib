@@ -2,6 +2,12 @@ package com.logs.formatter.stacktrace
 
 import com.logs.Constants
 
+/**
+ * Formatted stack trace looks like:
+ * <br>	├ com.log.MainClass.sampleMethodC(SampleClassC.java:198)
+ * <br>	├ com.log.MainClass.sampleMethodB(SampleClassB.java:101)
+ * <br>	└ com.log.MainClass.sampleMethodA(SampleClassA.java:51)
+ */
 class DefaultStackTraceFormatter: StackTraceFormatter {
 
     override fun format(data: Array<StackTraceElement?>): String {
