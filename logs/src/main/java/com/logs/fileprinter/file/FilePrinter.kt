@@ -76,10 +76,10 @@ class FilePrinter internal constructor(builder: Builder) : Printer {
     }
 
     private val channel = Channel<Boolean>(10000)
-    override fun println(logLevel: Int, tag: String, msg: String, classTag: String) {
+    override fun println(logLevel: String, tag: String, msg: String) {
 
         val time = System.currentTimeMillis()
-        val string = "$time, $logLevel , $tag, $msg, $classTag"
+        val string = "$time, $logLevel , $tag, $msg"
         doPrintln(string)
 
     }

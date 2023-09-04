@@ -5,5 +5,5 @@ package com.logs.fileprinter
  */
 interface Printer {
 
-    fun println(logLevel: Int, tag: String, msg: String, classTag: String)
+    fun println(logLevel: String, tag: String, msg: String)
 }

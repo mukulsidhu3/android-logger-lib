@@ -8,6 +8,9 @@ import com.logs.formatter.message.xml.XmlFormatter
 import com.logs.formatter.stacktrace.DefaultStackTraceFormatter
 import com.logs.utils.StackTraceUtil
 
+/**
+ * A logger is used to do the real logging work, can use multiple log printers to print the log.
+ */
 class Logger {
 
     private var logConfig: LogConfig? = null
@@ -160,13 +163,14 @@ class Logger {
         printInternal(logLevel, objectString)
     }
 
+    //Print a log in a new line internally.
     private fun printInternal(logLevel: Int, msg: String) {
 
         val stackTrace = StackTraceUtil().getCroppedRealStackTrace(Throwable().stackTrace, "kk", 5)
         val stackTraceString = DefaultStackTraceFormatter().format(stackTrace)
 
         val string = msg + stackTraceString
-        printer!!.println(logLevel, "TAG", string, "MAin")
+        printer!!.println(LogLevel.getShortLevelName(logLevel), "TAG", string)
 
         Log.d("CheckLogger", string)
     }

@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..10){
             Log.d("checkLoop", i.toString())
-            filePrinter.println(i,"LOG","This is message", "MainAct.")
+            filePrinter.println("V","LOG","This is message", "MainAct.")
         }
 
 

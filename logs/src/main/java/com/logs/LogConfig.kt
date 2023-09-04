@@ -23,12 +23,10 @@ class LogConfig internal constructor(val builder: Builder) {
     // The XML formatter used to format the XML string when log a XML string.
     val xmlFormatter: XmlFormatter
 
-
     // Whether we should log with stack trace.
     val withStackTrace: Boolean
 
     //val stackTraceOrigin: String
-
 
     // The number of stack trace elements we should log when logging with stack trace,
     // 0 if no limitation.
@@ -72,26 +70,31 @@ class LogConfig internal constructor(val builder: Builder) {
         private var objectFormatters: Map<Class<*>, ObjectFormatter<*>>? = null
 
 
+        //Set the log level, the logs below of which would not be printed.
         fun logLevel(logLevel: Int): Builder {
             this.logLevel = logLevel
             return this
         }
 
+        //Set the tag string used when log.
         fun tag(tag: String): Builder {
             this.tag = tag
             return this
         }
 
+        //Set the JSON formatter used when log a JSON string.
         fun jsonFormatter(jsonFormatter: JsonFormatter): Builder {
             this.jsonFormatter = jsonFormatter
             return this
         }
 
+        //Set the XML formatter used when log a XML string.
         fun xmlFormatter(xmlFormatter: XmlFormatter): Builder {
             this.xmlFormatter = xmlFormatter
             return this
         }
 
+        //Enable stack trace, the stack trace would be printed with the log message.
         fun enableStackTrace(depth: Int): Builder {
             this.withStackTrace = true
             this.stackTraceDepth = depth
@@ -110,6 +113,7 @@ class LogConfig internal constructor(val builder: Builder) {
         return T::class.java
     }
 
+    //Get ObjectFormatter for specific object.
     fun <T> getObjectFormatter(objects: T): ObjectFormatter<in T>? {
         if (objectFormatters == null) {
             return null
