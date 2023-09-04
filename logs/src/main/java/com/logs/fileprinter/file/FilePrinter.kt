@@ -1,19 +1,15 @@
 package com.logs.fileprinter.file
 
 
-import android.app.Application
-import androidx.lifecycle.Lifecycle
 import com.logs.fileprinter.Printer
 import com.logs.fileprinter.file.naming.FileNameGenerator
 import com.logs.fileprinter.file.writer.Writer
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.io.File
-import kotlin.coroutines.CoroutineContext
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 /**
  * Use the Builder to construct a FilePrinter object for create a file with mobile device information.
@@ -78,16 +74,21 @@ class FilePrinter internal constructor(builder: Builder) : Printer {
     private val channel = Channel<Boolean>(10000)
     override fun println(logLevel: String, tag: String, msg: String) {
 
-        val time = System.currentTimeMillis()
-        val string = "$time, $logLevel , $tag, $msg"
+        val currentTime = getCurrentTime()
+        val string = "$currentTime, $logLevel , $tag, $msg"
         doPrintln(string)
 
     }
 
 
-    fun doPrintln(string: String) {
+    private fun doPrintln(string: String) {
         MainScope().launch {
             channel.send(writer.appendLog(string))
         }
+    }
+
+    private fun getCurrentTime(): String {
+        val time = System.currentTimeMillis()
+        return SimpleDateFormat("dd/MM/yyy HH:mm:ss:SSS 'T'z", Locale.getDefault()).format(time)
     }
 }

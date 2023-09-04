@@ -56,19 +56,13 @@ class MainActivity : AppCompatActivity() {
 
     fun checkLogClass(logger: com.logs.Log){
 
-       logger.logger!!.println(1,"HEY")
-        logger.logger!!.v("VERBOS")
-        logger.logger!!.d("DEBUG")
-        logger.logger!!.i("INFO")
-        logger.logger!!.e("ERROR")
-        logger.logger!!.w("WARN")
+       logger.logger!!.println(1,"TAG","HEY")
+        logger.logger!!.v("TAG","VERBOS")
+        logger.logger!!.d("TAG","DEBUG")
+        logger.logger!!.i("TAG","INFO")
+        logger.logger!!.e("TAG","ERROR")
+        logger.logger!!.w("TAG","WARN")
     }
-
-    fun xmlFormat(string: String){
-
-
-    }
-
 
 
     fun permission(){
@@ -113,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..10){
             Log.d("checkLoop", i.toString())
-            filePrinter.println("V","LOG","This is message", "MainAct.")
+            filePrinter.println("V","LOG","This is message")
         }
 
 
