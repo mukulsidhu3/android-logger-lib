@@ -1,5 +1,6 @@
 package com.logs.fileprinter.file.writer
 
+import android.util.Log
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
@@ -70,6 +71,7 @@ open class SimpleWriter : Writer() {
     }
 
     override fun appendLog(log: String): Boolean {
+        Log.d("WriterW", "work")
         try {
             bufferedWriter!!.write(log)
             bufferedWriter!!.newLine()

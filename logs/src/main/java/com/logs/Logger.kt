@@ -100,56 +100,56 @@ class Logger {
     }
 
     /*package*/
-    fun println(logLevel: Int, msg: String?) {
+    fun println(logLevel: Int, tag: String?, msg: String?) {
         /*   if (logLevel < logConfig!!.logLevel) {
                return
            }  */
-        printInternal(logLevel, msg ?: "")
+        printInternal(logLevel, tag ?: "",msg ?: "")
     }
 
 
-    fun v(msg: String) {
-        println(LogLevel.VERBOS, msg)
+    fun v(tag: String, msg: String) {
+        println(LogLevel.VERBOS, tag, msg)
     }
 
-    fun d(msg: String) {
-        println(LogLevel.DEBUG, msg)
+    fun d(tag: String, msg: String) {
+        println(LogLevel.DEBUG, tag, msg)
     }
 
-    fun i(msg: String) {
-        println(LogLevel.INFO, msg)
+    fun i(tag: String, msg: String) {
+        println(LogLevel.INFO, tag, msg)
     }
 
-    fun e(msg: String) {
-        println(LogLevel.ERROR, msg)
+    fun e(tag: String, msg: String) {
+        println(LogLevel.ERROR, tag, msg)
     }
 
-    fun w(msg: String) {
-        println(LogLevel.WARN, msg)
+    fun w(tag: String, msg: String) {
+        println(LogLevel.WARN, tag, msg)
     }
 
     /**
      * Log a JSOn string
      */
-    fun json(json: String?) {
+    fun json(tag: String?, json: String?) {
         if (LogLevel.DEBUG < logConfig!!.logLevel) {
             return
         }
-        printInternal(LogLevel.DEBUG, logConfig!!.jsonFormatter.format(json!!))
+        printInternal(LogLevel.DEBUG, tag ?: "",logConfig!!.jsonFormatter.format(json!!))
     }
 
     /**
      * Log a XML string
      */
-    fun xml(xml: String?) {
+    fun xml(tag: String?, xml: String?) {
         if (LogLevel.DEBUG < logConfig!!.logLevel) {
             return
         }
-        printInternal(LogLevel.DEBUG, logConfig!!.xmlFormatter.format(xml!!))
+        printInternal(LogLevel.DEBUG, tag ?: "", logConfig!!.xmlFormatter.format(xml!!))
     }
 
 
-    private fun <T> println(logLevel: Int, `object`: T?) {
+    private fun <T> println(logLevel: Int,tag: String, `object`: T?) {
         if (logLevel < logConfig!!.logLevel) {
             return
         }
@@ -160,17 +160,17 @@ class Logger {
         } else {
             "null"
         }
-        printInternal(logLevel, objectString)
+        printInternal(logLevel, tag, objectString)
     }
 
     //Print a log in a new line internally.
-    private fun printInternal(logLevel: Int, msg: String) {
+    private fun printInternal(logLevel: Int,tag: String, msg: String) {
 
         val stackTrace = StackTraceUtil().getCroppedRealStackTrace(Throwable().stackTrace, "kk", 5)
         val stackTraceString = DefaultStackTraceFormatter().format(stackTrace)
 
         val string = msg + stackTraceString
-        printer!!.println(LogLevel.getShortLevelName(logLevel), "TAG", string)
+        printer!!.println(LogLevel.getShortLevelName(logLevel), tag, string)
 
         Log.d("CheckLogger", string)
     }
