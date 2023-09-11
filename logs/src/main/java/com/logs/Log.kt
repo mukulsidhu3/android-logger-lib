@@ -1,6 +1,10 @@
 package com.logs
 
+import android.app.Activity
+import android.app.Application
 import android.content.Context
+import android.os.Bundle
+import android.util.Log
 import com.logs.Constants.Companion.FILE_PATH
 import com.logs.fileprinter.file.FilePrinter
 import com.logs.fileprinter.file.naming.DateFileNameGenerator
@@ -10,8 +14,9 @@ import com.logs.formatter.message.json.DefaultJsonFormatter
 import com.logs.formatter.message.json.JsonFormatter
 import com.logs.formatter.message.xml.DefaultXmlFormatter
 import java.io.File
+import java.lang.ref.WeakReference
 
-class Log {
+class Log(val activity: Activity) {
     var logger: Logger? = null
 
     init {
@@ -25,7 +30,11 @@ class Log {
             .logLevel(logConfig.logLevel)
             .tag(logConfig.tag).build()
 
+
+     //   registerForCallback()
     }
+
+
 
     companion object{
 
@@ -46,6 +55,10 @@ class Log {
                     }
                 })
                 .build()
+
+        }
+
+        fun init(application: Application){
 
         }
     }

@@ -1,9 +1,14 @@
 package com.logs.fileprinter.file
 
 
+import android.util.Log
+import com.logs.LogLevel
 import com.logs.fileprinter.Printer
 import com.logs.fileprinter.file.naming.FileNameGenerator
 import com.logs.fileprinter.file.writer.Writer
+import com.logs.formatter.stacktrace.DefaultStackTraceFormatter
+import com.logs.utils.StackTraceUtil
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
@@ -75,8 +80,21 @@ class FilePrinter internal constructor(builder: Builder) : Printer {
     override fun println(logLevel: String, tag: String, msg: String) {
 
         val currentTime = getCurrentTime()
-        val string = "$currentTime, $logLevel , $tag, $msg"
+        val string = "\n$currentTime, $logLevel , $tag, $msg"
         doPrintln(string)
+
+    }
+
+    fun printRuntimeTrace(msg: String){
+        val stackTrace = StackTraceUtil().getCroppedRealStackTrace(Throwable().stackTrace, "kk", 5)
+        val stackTraceString = DefaultStackTraceFormatter().format(stackTrace)
+
+        val string = msg + stackTraceString
+      //  println("Exception", "Runtime Exception", string)
+        val currentTime = getCurrentTime()
+        val stringTrace = "\n$currentTime, Exception , Runtime Exception, $string"
+
+        writer.appendLog(stringTrace)
 
     }
 

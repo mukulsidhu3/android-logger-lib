@@ -21,11 +21,11 @@ class DefaultStackTraceFormatter: StackTraceFormatter {
             val n: Int = data.size
             while (i < n) {
                 if (i != n - 1) {
-                    sb.append("\t├ ")
+                    sb.append("\n├ ")
                     sb.append(data[i].toString())
                   //  sb.append(SystemCompat.lineSeparator)
                 } else {
-                    sb.append("\t└ ")
+                    sb.append("\n└ ")
                     sb.append(data[i].toString())
                 }
                 i++
