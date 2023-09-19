@@ -87,7 +87,7 @@ class ObjectToStringUtil {
 
     }
 
-    fun intentToShortString(intent: Intent, b: StringBuilder) {
+    private fun intentToShortString(intent: Intent, b: StringBuilder) {
 
         var first = true
         val mAction = intent.action

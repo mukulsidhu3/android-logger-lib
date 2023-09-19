@@ -2,7 +2,6 @@ package com.logs.storage
 
 import android.os.Environment
 import android.os.StatFs
-import android.util.Log
 import java.io.File
 
 /**
@@ -20,16 +19,15 @@ class StorageCheck: Storage {
         val availableSpace = formatSize(availableBlocks * blockSize)
         val totalSpace = formatSize(totalBlocks * blockSize)
 
-        return availableSpace
+        return formatSize(stat.availableBytes)
     }
 
     //Return format size of memory
     override fun formatSize(size: Long): Long {
         var totalSize = size
 
-        totalSize /= 1024
-        totalSize /= 1024
+        totalSize /= 1048576
 
-        return size
+        return totalSize
     }
 }

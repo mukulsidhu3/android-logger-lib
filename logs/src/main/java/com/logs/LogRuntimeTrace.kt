@@ -52,25 +52,23 @@ class LogRuntimeTrace(
 
     }
 
+    /**
+     * Write a new log to the cache directory if exception is an
+     * RuntimeException and config is set to true
+     * */
     private val thread = Thread.UncaughtExceptionHandler { _, e ->
 
         activity.let {
-            /*Write a new log to the cache directory if exception is an RuntimeException
-            and config is set to true*/
+
             val printer = FilePrinter.Builder(
                 Constants.FILE_PATH
             ).fileNameGenerator(DateFileNameGenerator())
                 .writer(SimpleWriter())
                 .build()
             if (e is RuntimeException) {
-                printer.printRuntimeTrace(e.message.toString())
-                Log.d("RunTimeThread", e.message.toString())
-
+                printer.printRuntimeTrace(e.message.toString(), e.stackTrace)
             } else {
-
-                printer.printRuntimeTrace(e.message.toString())
-                Log.d("RunTimeThread", e.message.toString())
-                // notifyClient(it, t, e)
+                printer.printRuntimeTrace(e.message.toString(), e.stackTrace)
             }
         }
     }

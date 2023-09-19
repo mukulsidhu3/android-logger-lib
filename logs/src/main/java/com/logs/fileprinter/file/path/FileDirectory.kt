@@ -11,6 +11,11 @@ import java.io.File
  */
 class FileDirectory(private val context: Context): FilePath {
 
+
+    /**
+     * This function will return LOG folder path.
+     * @return string
+     */
     override fun getFilePath(): String {
         val folderName = "LOG"
         val directory: File = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

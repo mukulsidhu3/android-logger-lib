@@ -100,11 +100,11 @@ class Logger {
     }
 
     /*package*/
-    fun println(logLevel: Int, tag: String?, msg: String?) {
+    private fun println(logLevel: Int, tag: String?, msg: String?) {
         /*   if (logLevel < logConfig!!.logLevel) {
                return
            }  */
-        printInternal(logLevel, tag ?: "",msg ?: "")
+        printInternal(logLevel, tag ?: "", msg ?: "")
     }
 
 
@@ -128,6 +128,13 @@ class Logger {
         println(LogLevel.WARN, tag, msg)
     }
 
+    fun customLog(fileName: String, tag: String, msg: String) {
+        val stackTrace = StackTraceUtil().getCroppedRealStackTrace(Throwable().stackTrace, "kk", 5)
+        val stackTraceString = DefaultStackTraceFormatter().format(stackTrace)
+        val string = msg + stackTraceString
+        printer!!.customLog(fileName, LogLevel.getLevelName(LogLevel.DEFAULT_LOG), tag, string)
+    }
+
     /**
      * Log a JSOn string
      */
@@ -135,7 +142,7 @@ class Logger {
         if (LogLevel.DEBUG < logConfig!!.logLevel) {
             return
         }
-        printInternal(LogLevel.DEBUG, tag ?: "",logConfig!!.jsonFormatter.format(json!!))
+        printInternal(LogLevel.DEBUG, tag ?: "", logConfig!!.jsonFormatter.format(json!!))
     }
 
     /**
@@ -149,7 +156,7 @@ class Logger {
     }
 
 
-    private fun <T> println(logLevel: Int,tag: String, `object`: T?) {
+    private fun <T> println(logLevel: Int, tag: String, `object`: T?) {
         if (logLevel < logConfig!!.logLevel) {
             return
         }
@@ -164,7 +171,7 @@ class Logger {
     }
 
     //Print a log in a new line internally.
-    private fun printInternal(logLevel: Int,tag: String, msg: String) {
+    private fun printInternal(logLevel: Int, tag: String, msg: String) {
 
         val stackTrace = StackTraceUtil().getCroppedRealStackTrace(Throwable().stackTrace, "kk", 5)
         val stackTraceString = DefaultStackTraceFormatter().format(stackTrace)

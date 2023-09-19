@@ -20,6 +20,8 @@ class LogLevel {
 
         const val ERROR = 6
 
+        const val DEFAULT_LOG = 7
+
         const val ALL = Int.MIN_VALUE
 
         const val NONE = Int.MAX_VALUE
@@ -33,6 +35,7 @@ class LogLevel {
                 INFO -> "INFO"
                 WARN -> "WARN"
                 ERROR -> "ERROR"
+                DEFAULT_LOG -> "DEFAULT_LOG"
                 else -> {
                     if (logLevel < VERBOSE) {
                         "VERBOSE-" + (VERBOSE - logLevel)

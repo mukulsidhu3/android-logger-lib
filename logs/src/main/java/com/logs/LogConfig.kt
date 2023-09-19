@@ -24,13 +24,13 @@ class LogConfig internal constructor(val builder: Builder) {
     val xmlFormatter: XmlFormatter
 
     // Whether we should log with stack trace.
-    val withStackTrace: Boolean
+    private val withStackTrace: Boolean
 
     //val stackTraceOrigin: String
 
     // The number of stack trace elements we should log when logging with stack trace,
     // 0 if no limitation.
-    val stackTraceDepth: Int
+    private val stackTraceDepth: Int
 
 
     // The object formatters, used when logging an object.
@@ -125,7 +125,7 @@ class LogConfig internal constructor(val builder: Builder) {
         var formatter: ObjectFormatter<in T>
         do {
             clazz = superClazz
-            formatter = objectFormatters.get(clazz) as ObjectFormatter<in T>
+            formatter = objectFormatters[clazz] as ObjectFormatter<in T>
             superClazz = clazz.superclass as Class<Any?>
         } while (formatter == null && superClazz != null)
         return formatter
