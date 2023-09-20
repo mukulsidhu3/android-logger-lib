@@ -9,7 +9,9 @@ import java.io.File
  */
 class StorageCheck: Storage {
 
-    //Get available size of internal memory.
+    /**
+     * Get available size of internal memory.
+     */
     override fun getInternalMemoryInfo(): Long {
         val path: File = Environment.getDataDirectory()
         val stat = StatFs(path.path)
@@ -22,7 +24,9 @@ class StorageCheck: Storage {
         return formatSize(stat.availableBytes)
     }
 
-    //Return format size of memory
+    /**
+     * Return format size of memory.
+     */
     override fun formatSize(size: Long): Long {
         var totalSize = size
 

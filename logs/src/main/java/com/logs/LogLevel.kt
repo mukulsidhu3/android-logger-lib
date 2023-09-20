@@ -26,7 +26,11 @@ class LogLevel {
 
         const val NONE = Int.MAX_VALUE
 
-        // Get a name representing the specified log level.
+        /**
+         * Get a name representing the specified log level.
+         * @param logLevel integer
+         * @return string level name
+         */
         fun getLevelName(logLevel: Int): String {
 
            val levelName = when (logLevel) {
@@ -48,7 +52,11 @@ class LogLevel {
             return levelName
         }
 
-        // Get a short name representing the specified log level.
+        /**
+         * Get a short name representing the specified log level.
+         * @param logLevel integer
+         * @return string short name.
+         */
         fun getShortLevelName(logLevel: Int): String {
 
             val levelName: String = when (logLevel) {

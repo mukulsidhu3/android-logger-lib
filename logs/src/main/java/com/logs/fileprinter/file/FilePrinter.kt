@@ -6,6 +6,7 @@ import com.logs.Constants.Companion.FILE_PATH
 import com.logs.Constants.Companion.VERSION_CODE
 import com.logs.Constants.Companion.VERSION_NAME
 import com.logs.Log.Companion.getBuildConfigConstant
+import com.logs.LogLevel
 import com.logs.fileprinter.Printer
 import com.logs.fileprinter.file.naming.FileNameGenerator
 import com.logs.fileprinter.file.writer.Writer
@@ -126,6 +127,11 @@ class FilePrinter internal constructor(builder: Builder) : Printer {
         writer.open(File(folderPath, "LogFile"))
         writer.appendLog(stringTrace)
 
+    }
+
+    override fun printInLogFile(logLevel: String, tag: String, msg: String){
+        writer.open(File(folderPath, "LogFile"))
+        println(logLevel, tag, msg)
     }
 
     /**

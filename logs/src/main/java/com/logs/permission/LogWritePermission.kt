@@ -5,8 +5,15 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 
+/**
+ * This class is for ask runtime permission for write and read external storage.
+ */
 class LogWritePermission: Permission  {
 
+    /**
+     * For write and read external storage permission.
+     * @param context
+     */
     override fun checkPermission(context: Context) {
         if (ActivityCompat.checkSelfPermission(
                 context,

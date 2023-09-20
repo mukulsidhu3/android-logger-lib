@@ -14,9 +14,6 @@ import kotlin.math.log
 class MainActivity : AppCompatActivity() {
     lateinit var viewBinding: ActivityMainBinding
 
-
-    //
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -29,36 +26,40 @@ class MainActivity : AppCompatActivity() {
 
         val logger = Log.init()
 
-        //  permission()
-        //initLog()
-        //  StorageCheck().getInternalMemoryInfo()
-        //  LogWritePermission().checkPermission(this)
-        //  initLog()
-
-
-        viewBinding.sendEmailButton.setOnClickListener {
-            //  ShareViaEmail().sendEmail(this,"com.logger.provider")
-            // stackTraceFormat()
-            //   checkLogClass(logger)
-            uncua(logger)
-            //  xmlFormat("<PrintLetterBarcodeData uid=\"633830176228\" name=\"Mukul Sidhu\" gender=\"M\" yob=\"2000\" co=\"S/O Jashpal Singh\" loc=\"Singhpura\" vtc=\"Singhpura\" po=\"Safidon\" dist=\"Jind\" subdist=\"Safidon\" state=\"Haryana\" pc=\"126112\" dob=\"01/04/2000\"/>")
+        viewBinding.customButton.setOnClickListener {
+            custom(logger)
         }
+
+        viewBinding.logButton.setOnClickListener {
+            checkLogClass(logger)
+        }
+
+        viewBinding.runtimeButton.setOnClickListener {
+            runtime(logger)
+        }
+
+
 
 
     }
 
-    fun uncua(logger: Logger) {
+    fun custom(logger: Logger) {
 
-      /*  try {
+        try {
             val cl = 0
             val b = 1;
             val c = b/cl
         }catch (e: Exception){
             android.util.Log.d("checkCatch", "uncua")
             logger.customLog("Mukul", "SYNC", "MSG")
+        }
 
-        }  */
-        logger.customLog("Mukul", "SYNC", "MSG")
+    }
+
+    fun runtime(logger: Logger){
+        val cl = 0
+        val b = 1;
+        val c = b/cl
     }
 
 

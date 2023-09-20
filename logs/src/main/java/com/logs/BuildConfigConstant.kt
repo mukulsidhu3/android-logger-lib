@@ -7,6 +7,12 @@ import android.os.Build
  */
 class BuildConfigConstant {
     companion object {
+        /**
+         * Device information for print in log file.
+         * @param versionCode
+         * @param versionName
+         * @return string
+         */
         fun getDeviceInformation(versionName: String, versionCode: Int): String {
 
             return """ 

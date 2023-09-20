@@ -9,6 +9,10 @@ class StackTraceUtil {
 
     /**
      * Get the real stack trace and then crop it with a max depth.
+     * @param stackTrace array of stack trace element.
+     * @param stackTraceOrigin string
+     * @param maxDepth integer
+     * @return array of stack trace element
      */
     fun getCroppedRealStackTrace(
         stackTrace: Array<StackTraceElement>,
@@ -26,6 +30,9 @@ class StackTraceUtil {
 
     /**
      * Get the real stack trace, all elements that come from XLog library would be dropped.
+     * @param stackTrace array of stack trace element.
+     * @param stackTraceOrigin string
+     * @return array of stack trace element.
      */
     private fun getRealStackTrace(
         stackTrace: Array<StackTraceElement>,
@@ -56,6 +63,9 @@ class StackTraceUtil {
 
     /**
      * Crop the stack trace with a max depth.
+     * @param callStack array of stack trace element.
+     * @param maxDepth integer
+     * @return array of stack trace element.
      */
     private fun getCropStackTrace(
         callStack: Array<StackTraceElement?>,

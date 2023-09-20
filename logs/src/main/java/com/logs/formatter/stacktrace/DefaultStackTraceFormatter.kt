@@ -10,6 +10,11 @@ import com.logs.Constants
  */
 class DefaultStackTraceFormatter: StackTraceFormatter {
 
+    /**
+     * Formatted stack trace with use of StackTraceElement.
+     * @param data array of stack trace element.
+     * @return string
+     */
     override fun format(data: Array<StackTraceElement?>): String {
         val sb = StringBuilder(256)
         return if (data.isEmpty()) {
