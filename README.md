@@ -27,7 +27,6 @@ If you are working on API level 29 or below need to add read/write permission
         }
     }
 
-
     private val activityResultLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions())
