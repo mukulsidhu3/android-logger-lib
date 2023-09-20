@@ -3,7 +3,8 @@
 A lightweight, visually appealing, powerful, and flexible logger for Android that can print logs to Logcat, Console, and Files.
 
 # Quick Start
-To initialize LogFile.
+To initialize and create LogFile.
+Write below code in application class.
 
 ```
 createFilePrinter(
