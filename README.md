@@ -6,6 +6,31 @@ A lightweight, visually appealing, powerful, and flexible logger for Android tha
 To initialize and create LogFile.
 Write below code in application class.
 
+If you are working on API level 29 or below need to add read/write permission
+
+```
+ if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                ),
+                101
+            )
+        } else {
+            Log.Companion.createFilePrinter(
+                BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+                this
+            )
+        }
+```
+
+For above 29 API 
 ```
 createFilePrinter(
 	BuildConfig.VERSION_NAME,
