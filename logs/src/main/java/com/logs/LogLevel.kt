@@ -20,11 +20,17 @@ class LogLevel {
 
         const val ERROR = 6
 
+        const val DEFAULT_LOG = 7
+
         const val ALL = Int.MIN_VALUE
 
         const val NONE = Int.MAX_VALUE
 
-        // Get a name representing the specified log level.
+        /**
+         * Get a name representing the specified log level.
+         * @param logLevel integer
+         * @return string level name
+         */
         fun getLevelName(logLevel: Int): String {
 
            val levelName = when (logLevel) {
@@ -33,6 +39,7 @@ class LogLevel {
                 INFO -> "INFO"
                 WARN -> "WARN"
                 ERROR -> "ERROR"
+                DEFAULT_LOG -> "DEFAULT_LOG"
                 else -> {
                     if (logLevel < VERBOSE) {
                         "VERBOSE-" + (VERBOSE - logLevel)
@@ -45,7 +52,11 @@ class LogLevel {
             return levelName
         }
 
-        // Get a short name representing the specified log level.
+        /**
+         * Get a short name representing the specified log level.
+         * @param logLevel integer
+         * @return string short name.
+         */
         fun getShortLevelName(logLevel: Int): String {
 
             val levelName: String = when (logLevel) {

@@ -5,6 +5,9 @@ import android.content.ContentResolver
 import android.os.Build
 import android.provider.Settings
 
+/**
+ * This class is used for get all details of mobile like brand name, model, sdk etc.
+ */
 class DeviceInfo private constructor(
     val brand: String,
     val deviceId: String,
@@ -21,6 +24,9 @@ class DeviceInfo private constructor(
     val fingerPrint: String,
     val versionCode: String
 ){
+    /**
+     * Builder object for device info.
+     */
     object Builder {
         @SuppressLint("HardwareIds")
         fun build(contentResolver: ContentResolver): DeviceInfo {

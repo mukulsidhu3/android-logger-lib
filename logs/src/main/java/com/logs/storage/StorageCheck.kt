@@ -2,7 +2,6 @@ package com.logs.storage
 
 import android.os.Environment
 import android.os.StatFs
-import android.util.Log
 import java.io.File
 
 /**
@@ -10,7 +9,9 @@ import java.io.File
  */
 class StorageCheck: Storage {
 
-    //Get available size of internal memory.
+    /**
+     * Get available size of internal memory.
+     */
     override fun getInternalMemoryInfo(): Long {
         val path: File = Environment.getDataDirectory()
         val stat = StatFs(path.path)
@@ -20,16 +21,17 @@ class StorageCheck: Storage {
         val availableSpace = formatSize(availableBlocks * blockSize)
         val totalSpace = formatSize(totalBlocks * blockSize)
 
-        return availableSpace
+        return formatSize(stat.availableBytes)
     }
 
-    //Return format size of memory
+    /**
+     * Return format size of memory.
+     */
     override fun formatSize(size: Long): Long {
         var totalSize = size
 
-        totalSize /= 1024
-        totalSize /= 1024
+        totalSize /= 1048576
 
-        return size
+        return totalSize
     }
 }

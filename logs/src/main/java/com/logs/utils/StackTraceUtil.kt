@@ -9,6 +9,10 @@ class StackTraceUtil {
 
     /**
      * Get the real stack trace and then crop it with a max depth.
+     * @param stackTrace array of stack trace element.
+     * @param stackTraceOrigin string
+     * @param maxDepth integer
+     * @return array of stack trace element
      */
     fun getCroppedRealStackTrace(
         stackTrace: Array<StackTraceElement>,
@@ -26,8 +30,11 @@ class StackTraceUtil {
 
     /**
      * Get the real stack trace, all elements that come from XLog library would be dropped.
+     * @param stackTrace array of stack trace element.
+     * @param stackTraceOrigin string
+     * @return array of stack trace element.
      */
-    fun getRealStackTrace(
+    private fun getRealStackTrace(
         stackTrace: Array<StackTraceElement>,
         stackTraceOrigin: String
     ): Array<StackTraceElement?> {
@@ -37,7 +44,9 @@ class StackTraceUtil {
         for (i in allDepth - 1 downTo 0) {
             className = stackTrace[i].className
             Log.d("ClassName", className)
-            if (className.startsWith("com.logs.Logger") || stackTraceOrigin != null && className.startsWith(
+            if (className.startsWith("com.logs.Logger") || className.startsWith("com.logs.fileprinter") || className.startsWith(
+                    "com.logs.LogRuntimeTrace"
+                ) || stackTraceOrigin != null && className.startsWith(
                     stackTraceOrigin
                 )
             ) {
@@ -54,6 +63,9 @@ class StackTraceUtil {
 
     /**
      * Crop the stack trace with a max depth.
+     * @param callStack array of stack trace element.
+     * @param maxDepth integer
+     * @return array of stack trace element.
      */
     private fun getCropStackTrace(
         callStack: Array<StackTraceElement?>,
@@ -61,7 +73,7 @@ class StackTraceUtil {
     ): Array<StackTraceElement?> {
         var realDepth = callStack.size
         if (maxDepth > 0) {
-            realDepth = Math.min(maxDepth, realDepth)
+            realDepth = maxDepth.coerceAtMost(realDepth)
         }
         val realStack = arrayOfNulls<StackTraceElement>(realDepth)
         System.arraycopy(callStack, 0, realStack, 0, realDepth)

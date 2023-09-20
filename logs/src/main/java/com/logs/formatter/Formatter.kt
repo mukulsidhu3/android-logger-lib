@@ -5,5 +5,10 @@ package com.logs.formatter
  */
 interface Formatter<T> {
 
+    /**
+     * For format json, xml, stackTrace, intent bundle into string.
+     * @param data T type
+     * @return string
+     */
     fun format(data: T): String
 }

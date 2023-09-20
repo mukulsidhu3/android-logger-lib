@@ -6,4 +6,8 @@ package com.logs.fileprinter
 interface Printer {
 
     fun println(logLevel: String, tag: String, msg: String)
+
+    fun customLog(fileName: String, logLevel: String, tag: String, msg: String)
+
+    fun printInLogFile(logLevel: String, tag: String, msg: String)
 }

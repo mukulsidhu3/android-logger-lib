@@ -16,6 +16,8 @@ class ObjectToStringUtil {
 
     /**
      * Bundle object to string, the string would be in the format of "Bundle[{...}]".
+     * @param bundle
+     * @return string
      */
     fun bundleToString(bundle: Bundle): String {
         if (bundle == null) {
@@ -31,6 +33,11 @@ class ObjectToStringUtil {
 
     }
 
+    /**
+     * Bundle object to string, the string would be in the format of "Bundle[{...}]" in brief.
+     * @param bundle
+     * @param b string builder
+     */
     private fun bundleToBriefString(bundle: Bundle, b: StringBuilder) {
         var first = true
 
@@ -73,6 +80,8 @@ class ObjectToStringUtil {
 
     /**
      * Intent object to string, the string would be in the format of "Intent { ... }".
+     * @param intent
+     * @return string
      */
     fun intentToString(intent: Intent): String {
         if (intent == null) {
@@ -87,7 +96,12 @@ class ObjectToStringUtil {
 
     }
 
-    fun intentToShortString(intent: Intent, b: StringBuilder) {
+    /**
+     * Intent object to string, the string would be in the format of "Intent { ... }" in short.
+     * @param intent
+     * @param b string builder
+     */
+    private fun intentToShortString(intent: Intent, b: StringBuilder) {
 
         var first = true
         val mAction = intent.action
@@ -210,7 +224,12 @@ class ObjectToStringUtil {
 
     }
 
-    private fun uriToSafeString(uri: Uri): String? {
+    /**
+     * Uri object to string, the string would be in the format of URI.
+     * @param uri
+     * @return string
+     */
+    private fun uriToSafeString(uri: Uri): String {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             try {
                 val toSafeString = Uri::class.java.getDeclaredMethod("toSafeString")

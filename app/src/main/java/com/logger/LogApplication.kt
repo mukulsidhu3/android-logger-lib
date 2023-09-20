@@ -9,12 +9,11 @@ class LogApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        logInit()
-        LogRuntimeTrace().registerForCallback(this)
-    }
 
-    private fun logInit() {
-      // val logConfig =  LogConfig.Builder().
+        /**
+         * Register log runtime trace for write exception message in log file.
+         */
+        LogRuntimeTrace().registerForCallback(this)
     }
 
 }

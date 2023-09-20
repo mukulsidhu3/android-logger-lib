@@ -9,15 +9,31 @@ import com.logs.fileprinter.file.naming.DateFileNameGenerator
 import com.logs.fileprinter.file.writer.SimpleWriter
 import java.lang.ref.WeakReference
 
+/**
+ * This class is used for print runtime exception in log file with stack trace.
+ */
 class LogRuntimeTrace(
     val activity: WeakReference<Activity>? = null
 ) {
+
+    /**
+     * object of application class
+     */
     var application: Application? = null
+
+    /**
+     * Register callback for Activity Lifecycle
+     * @param application
+     */
     fun registerForCallback(application: Application) {
         this.application = application
         application.registerActivityLifecycleCallbacks(activityCallback)
     }
 
+    /**
+     * Unregister exception handler.
+     * @param isRegister boolean
+     */
     fun unregisterOrUnregisterUncaughtExceptionHandler(isRegister: Boolean) {
         activity.apply {
             Thread.setDefaultUncaughtExceptionHandler(if (isRegister) thread else null)
@@ -52,25 +68,23 @@ class LogRuntimeTrace(
 
     }
 
+    /**
+     * Write a new log to the cache directory if exception is an
+     * RuntimeException and config is set to true
+     * */
     private val thread = Thread.UncaughtExceptionHandler { _, e ->
 
         activity.let {
-            /*Write a new log to the cache directory if exception is an RuntimeException
-            and config is set to true*/
+
             val printer = FilePrinter.Builder(
                 Constants.FILE_PATH
             ).fileNameGenerator(DateFileNameGenerator())
                 .writer(SimpleWriter())
                 .build()
             if (e is RuntimeException) {
-                printer.printRuntimeTrace(e.message.toString())
-                Log.d("RunTimeThread", e.message.toString())
-
+                printer.printRuntimeTrace(e.message.toString(), e.stackTrace)
             } else {
-
-                printer.printRuntimeTrace(e.message.toString())
-                Log.d("RunTimeThread", e.message.toString())
-                // notifyClient(it, t, e)
+                printer.printRuntimeTrace(e.message.toString(), e.stackTrace)
             }
         }
     }

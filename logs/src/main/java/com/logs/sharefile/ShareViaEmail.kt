@@ -16,6 +16,11 @@ import java.io.File
  */
 class ShareViaEmail : ShareFile {
 
+    /**
+     * Function used for send email.
+     * @param context
+     * @param provider string
+     */
     override fun sendEmail(
         context: Context,
         provider: String
