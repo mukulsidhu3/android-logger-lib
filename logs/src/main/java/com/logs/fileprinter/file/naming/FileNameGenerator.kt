@@ -12,6 +12,9 @@ interface FileNameGenerator {
 
    /**
     * Generate file name for specified log level and timestamp.
+    * @param logLevel for log level
+    * @param timeStamp for date timeStamp
+    * @return string
     */
    fun generateFileName(logLevel: Int, timeStamp: Long): String
 

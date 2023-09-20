@@ -1,20 +1,19 @@
 package com.logger
 
+import android.app.Activity
 import android.app.Application
-import android.os.Build
-import android.util.Printer
-import com.logs.fileprinter.file.FilePrinter
-import com.logs.fileprinter.file.naming.DateFileNameGenerator
-import com.logs.fileprinter.file.writer.SimpleWriter
-import java.io.File
+import com.logs.LogConfig
+import com.logs.LogRuntimeTrace
 
-class LogApplication: Application() {
+class LogApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        /**
+         * Register log runtime trace for write exception message in log file.
+         */
+        LogRuntimeTrace().registerForCallback(this)
     }
-
-
-
 
 }

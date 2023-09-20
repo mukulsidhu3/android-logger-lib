@@ -1,38 +1,79 @@
 package com.logger
 
-import android.app.Activity
 import android.content.pm.PackageManager
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.logs.BuildConfigConstant
-import com.logs.fileprinter.file.FilePrinter
-import com.logs.fileprinter.file.naming.DateFileNameGenerator
-import com.logs.fileprinter.file.path.FileDirectory
-import com.logs.fileprinter.file.writer.SimpleWriter
-import com.logs.permission.LogWritePermission
-import com.logs.storage.StorageCheck
-import java.io.File
+import com.logger.databinding.ActivityMainBinding
+import com.logs.Log
+import com.logs.Logger
+import java.lang.Exception
+import java.util.Calendar
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
+    lateinit var viewBinding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-      //  permission()
-        //initLog()
+        viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
 
-        StorageCheck().getInternalMemoryInfo()
-        LogWritePermission().checkPermission(this)
-        initLog()
+        Log.Companion.createFilePrinter(
+            BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+            this
+        )
+
+        val logger = Log.init()
+
+        viewBinding.customButton.setOnClickListener {
+            custom(logger)
+        }
+
+        viewBinding.logButton.setOnClickListener {
+            checkLogClass(logger)
+        }
+
+        viewBinding.runtimeButton.setOnClickListener {
+            runtime(logger)
+        }
+
+
+
+
+    }
+
+    fun custom(logger: Logger) {
+
+        try {
+            val cl = 0
+            val b = 1;
+            val c = b/cl
+        }catch (e: Exception){
+            android.util.Log.d("checkCatch", "uncua")
+            logger.customLog("Mukul", "SYNC", "MSG")
+        }
+
+    }
+
+    fun runtime(logger: Logger){
+        val cl = 0
+        val b = 1;
+        val c = b/cl
     }
 
 
-    fun permission(){
+
+    fun checkLogClass(logger: Logger?) {
+        logger!!.v("TAG", "VERBOS")
+        logger.d("TAG", "DEBUG")
+        logger.i("TAG", "INFO")
+        logger.e("TAG", "ERROR")
+        logger.w("TAG", "WARN")
+    }
+
+
+    fun permission() {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -46,39 +87,9 @@ class MainActivity : AppCompatActivity() {
                 ),
                 101
             )
-        }else{
-           // pdfFileInPrivate()
-            initLog()
+        } else {
+            // pdfFileInPrivate()
         }
     }
-
-    fun initLog(){
-        /**
-         * LogConfiguration Task
-         */
-
-       val filePrinter = FilePrinter.Builder(
-            FileDirectory(this).getFilePath()).fileNameGenerator(DateFileNameGenerator())
-            .writer(object : SimpleWriter(){
-                @Override
-                override fun onNewFileCreated(file: File) {
-                    super.onNewFileCreated(file)
-                    val header = BuildConfigConstant.getDeviceInformation(BuildConfig.VERSION_NAME,
-                    BuildConfig.VERSION_CODE)
-                    appendLog(header)
-                }
-            })
-            .build()
-
-        for (i in 0..1000){
-            Log.d("checkLoop", i.toString())
-            filePrinter.println(i,"LOG","This is meesage", "MainAct.")
-        }
-
-    }
-
-
-
-
 
 }

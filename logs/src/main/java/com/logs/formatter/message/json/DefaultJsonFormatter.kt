@@ -11,7 +11,11 @@ class DefaultJsonFormatter : JsonFormatter {
 
     private val jsonIndent = 4
 
-
+    /**
+     * Format the JSON string.
+     * @param data string
+     * @return string
+     */
     override fun format(data: String): String {
         var formattedString: String = Constants.EMPTY_STRING
 

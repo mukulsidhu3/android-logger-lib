@@ -9,6 +9,9 @@ import java.util.TimeZone
  */
 class DateFileNameGenerator : FileNameGenerator {
 
+    /**
+     * Variable for local date format (yyyy-MM-dd).
+     */
     var localDateFormat: ThreadLocal<SimpleDateFormat> =
         object : ThreadLocal<SimpleDateFormat>() {
             override fun initialValue(): SimpleDateFormat {
@@ -16,12 +19,20 @@ class DateFileNameGenerator : FileNameGenerator {
             }
         }
 
+    /**
+     * Check if file name changeable or not.
+     * @return boolean
+     */
     override fun isFileNameChangeable(): Boolean {
         return false
     }
 
     /**
      * Generate a file name which represent a date.
+     *
+     * @param logLevel for log level
+     * @param timeStamp for date timeStamp
+     * @return string
      */
     override fun generateFileName(logLevel: Int, timeStamp: Long): String {
         val simpleDateFormat: SimpleDateFormat = localDateFormat.get() as SimpleDateFormat

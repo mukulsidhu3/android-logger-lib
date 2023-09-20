@@ -5,7 +5,6 @@ import java.io.StringReader
 import java.io.StringWriter
 import java.lang.Exception
 import javax.xml.transform.OutputKeys
-import javax.xml.transform.Transformer
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
@@ -16,6 +15,11 @@ import javax.xml.transform.stream.StreamSource
 class DefaultXmlFormatter: XmlFormatter {
     private val xmlIndent = 4
 
+    /**
+     * Format the XML with a indent of XML_INDENT.
+     * @param data string
+     * @return string
+     */
     override fun format(data: String): String {
        var formattedString = Constants.EMPTY_STRING
 
