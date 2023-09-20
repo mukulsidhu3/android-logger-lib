@@ -2,6 +2,7 @@ package com.logger
 
 import android.app.Activity
 import android.app.Application
+import com.logs.Log
 import com.logs.LogConfig
 import com.logs.LogRuntimeTrace
 
