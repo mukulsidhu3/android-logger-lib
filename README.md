@@ -3,8 +3,51 @@
 A lightweight, visually appealing, powerful, and flexible logger for Android that can print logs to Logcat, Console, and Files.
 
 # Quick Start
-To initialize LogFile.
+To initialize and create LogFile.
+Write below code in activity class.
 
+If you are working on API level 29 or below need to add read/write permission
+
+```
+   fun permission() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            activityResultLauncher.launch(
+                arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            )
+        } else {
+            Log.Companion.createFilePrinter(
+                BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+                this
+            )
+        }
+    }
+
+    private val activityResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions())
+        { permissions ->
+            // Handle Permission granted/rejected
+            permissions.entries.forEach {
+                val permissionName = it.key
+                val isGranted = it.value
+                if (isGranted) {
+                    Log.Companion.createFilePrinter(
+                        BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,
+                        this
+                    )
+                } else {
+                    Toast.makeText(this, "Fail", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+```
+
+For above 29 API 
 ```
 createFilePrinter(
 	BuildConfig.VERSION_NAME,
