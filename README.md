@@ -1,12 +1,12 @@
 # Logger library
 
-A lightweight, visually appealing, powerful, and flexible logger for Android that can print logs to Logcat, Console, and Files. This is a simple library that will allow Android apps or libraries to store log messages into the log file so that developers can detect where the problems, warnings and errors are occurring
+A lightweight, visually appealing, powerful, and flexible logger for Android that can print logs to Logcat, Console, and Files. This is a simple library that will allow Android apps or libraries to store log messages into the log file so that developers can detect where the problems, warnings and errors are occurring.
 
 # Quick Start
 To initialize and create LogFile.
 Write below code in activity class.
 
-If you are working on API level 29 or below need to add read/write permission
+If you are working on API level 29 or below need to add read/write permission.
 
 ```
    fun permission() {
@@ -102,7 +102,7 @@ log.w("TAG","WARN")
 
 # Custom Logs in user defined file path
 
-You can also log custom messages with a specified file name
+You can also log custom messages with a specified file name.
 
 ```
 LogClassObject.customLog(FILE_NAME, TAG_TO_INDENTIFY, MESSAGE_OR_TROWABLE_TO_PRINT)
@@ -182,7 +182,7 @@ LogWritePermission().checkPermission(this)
 # Automatic crash detection
 This functionality helps developers detect and find solutions for crashes occurring in the application. By enabling this feature, the app will automatically detect crashes and write logs related to those crashes.
 
-Use of LogRuntimeTrace class and registerForCallback function
+Use of LogRuntimeTrace class and registerForCallback function.
 
 ```
 //Write this line in onCreate method of Application Class.
