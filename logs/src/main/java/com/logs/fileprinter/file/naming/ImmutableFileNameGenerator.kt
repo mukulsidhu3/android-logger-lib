@@ -3,7 +3,7 @@ package com.logs.fileprinter.file.naming
 /**
  * Generate a file name that is changeless.
  */
-class ChangelessFileNameGenerator internal constructor(private val fileName: String): FileNameGenerator {
+class ImmutableFileNameGenerator internal constructor(private val fileName: String): FileNameGenerator {
 
     /**
      * Check if file name changeable or not.
