@@ -1,6 +1,6 @@
 # Logger library
 
-A lightweight, visually appealing, powerful, and flexible logger for Android that can print logs to Logcat, Console, and Files.
+A lightweight, visually appealing, powerful, and flexible logger for Android that can print logs to Logcat, Console, and Files. This is a simple library that will allow Android apps or libraries to store log messages into the log file so that developers can detect where the problems, warnings and errors are occurring
 
 # Quick Start
 To initialize and create LogFile.
@@ -117,7 +117,7 @@ log.customLog("customLogFile","CUSTOM", "This is custom message")
 # FileDirectory
 The FileDirectory class is used to obtain the path where the LogFile is created for accessing and writing logs to it.
 
-FilePrinter to create file and write logs
+# FilePrinter to create file and write logs
 
 This functionality is used to write logs into a file generated at the app-specific path provided by the FileDirectory class. Example of using the builder to construct a FilePrinter object.
 
@@ -130,7 +130,7 @@ val printer = FilePrinter.Builder(
 ```
 
 # JsonFormatter
-The JsonFormatter class helps format unformatted JSON strings.
+JSON stands for JavaScript Object Notation.It is an independent data exchange format and is the best alternative for XML. The JsonFormatter class helps format unformatted JSON strings.
 
 Example:
 
@@ -140,7 +140,7 @@ Logger().json(JSON_CONTENT)
 
 # XmlFormatter
 
-The XmlFormatter class helps format unformatted XML strings.
+XML notation is very helpful to read and understand log messages. Hence, XMLFormatter provides an efficient way to achieve the same. The XmlFormatter class helps format unformatted XML strings.
 
 Example:
 
@@ -149,7 +149,7 @@ Logger().xml(XML_CONTENT)
 ```
 
 # StackTraceFormatter
-The StackTraceFormatter class helps format stacks of logs.
+Debugging an app often requires working with stack traces. A stack trace is generated when your app crashes because of an error or an exception. The StackTraceFormatter class helps format stacks of logs.
 
 ```
 val stackTraceString =  DefaultStackTraceFormatter().format(stackTrace)
@@ -184,9 +184,8 @@ This functionality helps developers detect and find solutions for crashes occurr
 
 Use of LogRuntimeTrace class and registerForCallback function
 
-//Write this line in onCreate method of Application Class.
-
 ```
+//Write this line in onCreate method of Application Class.
 LogRuntimeTrace().registerForCallback(this)
 ```
 
